@@ -306,3 +306,4 @@ TesterMetadata.xml
 
 # Backup files
 .bak
+.env
