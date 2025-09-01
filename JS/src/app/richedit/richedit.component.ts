@@ -1,6 +1,7 @@
 import { create, createOptions, RichEdit, Options, RibbonTabType, FileTabItemId, HomeTabItemId, RibbonItem, RibbonSubMenuItem, RibbonMenuItem, RibbonButtonItem, FirstLevelRibbonItem, RibbonTab } from 'devexpress-richedit';
 
 import { AfterViewInit, Component, ElementRef, OnDestroy } from '@angular/core';
+import { DocumentFormatApi } from 'devexpress-richedit/lib/model-api/formats/enum';
 
 @Component({
   selector: 'app-richedit',
@@ -63,6 +64,42 @@ export class RicheditComponent implements AfterViewInit, OnDestroy {
         }
       }
     };
+
+      // di dalam ribbonCustomization(options: Options) setelah remove/insert tab lain
+    const openTabId = 'OpenTabId';
+    const newOpenTab = options.ribbon.insertTab(
+      new RibbonTab('Open', openTabId, []), // kosong dulu
+      3 // posisi index tab
+    );
+
+    // tambahkan tombol "Open Document"
+    const openCustomId = 'OpenCustomId';
+    newOpenTab.insertItem(
+      new RibbonButtonItem(openCustomId, 'Open Document', { icon: 'export', showText: true })
+    );
+
+    // handle event saat tombol diklik
+    options.events.customCommandExecuted = (s, e) => {
+      if (e.commandName === openCustomId) {
+        // di sini kamu bisa bikin file input untuk buka file, contoh:
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.docx,.rtf,.txt'; // format yang kamu support
+        input.onchange = (event: any) => {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (ev: any) => {
+              const arrayBuffer = ev.target.result;
+              s.openDocument(arrayBuffer, file.name, DocumentFormatApi.Rtf); // load ke RichEdit
+            };
+            reader.readAsArrayBuffer(file);
+          }
+        };
+        input.click();
+      }
+    };
+
   }  
 
   ngAfterViewInit(): void {
