@@ -55,10 +55,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "richedit-how-to-customize-built-in-ribbon:build:production"
+              "buildTarget": "richedit-how-to-customize-built-in-ribbon:build:production"
             },
             "development": {
-              "browserTarget": "richedit-how-to-customize-built-in-ribbon:build:development"
+              "buildTarget": "richedit-how-to-customize-built-in-ribbon:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -66,7 +66,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "richedit-how-to-customize-built-in-ribbon:build"
+            "buildTarget": "richedit-how-to-customize-built-in-ribbon:build"
           }
         },
         "test": {

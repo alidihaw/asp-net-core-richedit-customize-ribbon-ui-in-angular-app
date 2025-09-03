@@ -1,10 +1,11 @@
 import { create, createOptions, RichEdit, Options, RibbonTabType, FileTabItemId, HomeTabItemId, RibbonItem, RibbonSubMenuItem, RibbonMenuItem, RibbonButtonItem, FirstLevelRibbonItem, RibbonTab } from 'devexpress-richedit';
 
 import { AfterViewInit, Component, ElementRef, OnDestroy } from '@angular/core';
-import { DocumentFormatApi } from 'devexpress-richedit/lib/model-api/formats/enum';
+// import { DocumentFormatApi } from 'devexpress-richedit/lib/model-api/formats/enum';
 
 @Component({
   selector: 'app-richedit',
+  standalone: false,
   template: '<div></div>',
   styleUrls: ['./richedit.component.css']
 })
